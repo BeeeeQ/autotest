@@ -1,5 +1,3 @@
-
-
 # Напишите функцию to_roman, которая преобразуют арабское число (val) в римское (roman_str).
 #
 # Современные римские цифры записываются, выражая каждую цифру отдельно,
@@ -19,17 +17,38 @@ def to_roman(val):
     :return: Год римской записью
     """
     # Здесь нужно написать код
-    ones = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
-    tens = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
-    hundreds = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
-    thousands = ["", "M", "MM", "MMM", "MMMM"]
+    dict_roman = {1: 'I',
+                  5: 'V', 10: 'X',
+                  50: 'L', 100: 'C',
+                  500: 'D', 1000: 'M'}
+    thousands, hundred, tens, ones = val // 1000, val // 100 % 10, val // 10 % 10, val % 10
+    thousands = thousands * dict_roman.get(1000)
 
-    thousand = thousands[val // 1000]
-    hundred = hundreds[val // 100 % 10]
-    ten = tens[val // 10 % 10]
-    one = ones[val % 10]
-    roman_str = thousand+hundred+ten+one
+    def get_roman_str(num: int, factor: int) -> str:
+        """
+Метод принимает два параметра число и множитель (разрядность - единицы, десятки или сотни)
+и возвращает строку римской записью
+        :param num: Число
+        :param factor: Разрядность числа - единицы, десятки или сотни
+        :return:
+        """
+        if num < 4:
+            roman_value = num * dict_roman.get(1 * factor)
+        elif num == 4:
+            roman_value = dict_roman.get(1 * factor) + dict_roman.get(5 * factor)
+        elif 5 <= num < 9:
+            roman_value = dict_roman.get(5 * factor) + dict_roman.get(1 * factor) * (num - 5)
+        else:
+            roman_value = dict_roman.get(1 * factor) + dict_roman.get(10 * factor)
+        return roman_value
+
+    hundred = get_roman_str(hundred, 100)
+    tens = get_roman_str(tens, 10)
+    ones = get_roman_str(ones, 1)
+    roman_str = thousands + hundred + tens + ones
+
     return roman_str
+
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
@@ -39,7 +58,6 @@ data = [1133, 2224, 1938, 1817, 2505, 391, 3743, 1634, 699, 1666, 1494, 1444]
 test_data = [
     "MCXXXIII", "MMCCXXIV", "MCMXXXVIII", "MDCCCXVII", "MMDV", "CCCXCI", 'MMMDCCXLIII', 'MDCXXXIV', 'DCXCIX', 'MDCLXVI',
     'MCDXCIV', 'MCDXLIV']
-
 
 for i, d in enumerate(data):
     assert to_roman(d) == test_data[i], f'С набором {d} есть ошибка, не проходит проверку'
