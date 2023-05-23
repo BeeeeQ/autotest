@@ -52,7 +52,7 @@ class PublicTransport:
 
 class Bus(PublicTransport):
 
-    def __init__(self, brand, _engine_power, year, color, max_speed, passengers, __park, _fare):
+    def __init__(self, brand, _engine_power, year, color, max_speed, passengers, park, fare):
         """
 Конструктор класса Bus, создает объект Bus с параметрами унаследованными от PublicTransport и
 дополнительными параметрами passenger, __park и _fare
@@ -62,13 +62,13 @@ class Bus(PublicTransport):
         :param color: Цвет
         :param max_speed: Максимальная скорость
         :param passengers: Количество пассажиров
-        :param __park: Парк приписки автобуса
-        :param _fare: Стоимость проезда
+        :param park: Парк приписки автобуса
+        :param fare: Стоимость проезда
         """
         super().__init__(brand, _engine_power, year, color, max_speed)
         self.passengers = passengers
-        self.__park = __park
-        self._fare = _fare
+        self.__park = park
+        self._fare = fare
 
     @property
     def park(self):
@@ -79,34 +79,34 @@ class Bus(PublicTransport):
         return self.park
 
     @park.setter
-    def park(self, __park):
+    def park(self, park):
         """
 Сеттер парка приписки автобуса
-        :param __park: Парк приписки автобуса
+        :param park: Парк приписки автобуса
         """
-        assert 1000 <= __park <= 9999, 'Номер парка должен быть от 1000 до 9999'
-        self.__park = __park
+        assert 1000 <= park <= 9999, 'Номер парка должен быть от 1000 до 9999'
+        self.__park = park
 
 
 class Tram(PublicTransport):
 
-    def __init__(self, brand, _engine_power, year, color, max_speed, __route, path, _fare):
+    def __init__(self, brand, engine_power, year, color, max_speed, route, path, fare):
         """
 Конструктор класса Tram, создает объект Tram с параметрами унаследованными от PublicTransport и
 дополнительными параметрами route, path и fare
         :param brand: Марка транспорта
-        :param _engine_power: Мощность двигателя
+        :param engine_power: Мощность двигателя
         :param year: Год выпуска
         :param color: Цвет
         :param max_speed: Максимальная скорость
-        :param __route: Маршрут трамвая
+        :param route: Маршрут трамвая
         :param path: Длина маршрута
-        :param _fare: Стоимость проезда
+        :param fare: Стоимость проезда
         """
-        super().__init__(brand, _engine_power, year, color, max_speed)
-        self.__route = __route
+        super().__init__(brand, engine_power, year, color, max_speed)
+        self.__route = route
         self.path = path
-        self._fare = _fare
+        self._fare = fare
 
     @property
     def how_long(self):
