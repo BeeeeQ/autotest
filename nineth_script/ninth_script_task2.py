@@ -45,11 +45,13 @@ def func_log(file_log='log.txt'):
     """
     def date_writer(func):
         def wrapper():
-            wrapper.__name__ = func.__name__
-            wrapper.__doc__ = func.__doc__
+
             with open(file_log, 'a', encoding='utf-8') as file:
                 file.write(f"{func.__name__} вызвана {datetime.datetime.now().strftime('%d.%m %H:%M:%S')}\n")
             func()
+
+        wrapper.__name__ = func.__name__
+        wrapper.__doc__ = func.__doc__
         return wrapper
     return date_writer
 
@@ -60,6 +62,7 @@ def func1():
 Метод номер 1
     """
     time.sleep(0.1)
+    pass
 
 
 @func_log(file_log='func2.txt')
@@ -73,4 +76,24 @@ def func2():
 func1()
 func2()
 func1()
-print(help(func1))
+
+
+@func_log()
+def func1():
+    """
+Метод номер 1
+    """
+    pass
+
+
+help(func1)
+
+
+def func1():
+    """
+Метод номер 1
+    """
+    pass
+
+
+help(func1)
