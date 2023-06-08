@@ -58,8 +58,9 @@ try:
     assert send_btn.is_displayed(), 'Не отображается кнопка отправки сообщения'
     send_btn.click()
     sleep(1)
-    my_msg = driver.find_element(By.XPATH, f'//p[(text()="{msg_text}")]')
+    my_msg = driver.find_element(By.CSS_SELECTOR, '.msg-entity-text p')
     assert my_msg.is_displayed(), 'Не найдено отправленное сообщение'
+    assert my_msg.text == msg_text, f'Текст сообщения не равен эталонному - {msg_text}'
     action_chains = ActionChains(driver)
     action_chains.move_to_element(my_msg)
     action_chains.context_click(my_msg)
@@ -69,10 +70,8 @@ try:
     assert delete_btn.is_displayed(), 'Не найден пункт меню Удалить'
     delete_btn.click()
     sleep(2)
-    try:
-        my_msg.is_displayed()
-        assert True, 'Сообщение не исчезло из реестра после удаления'
-    except StaleElementReferenceException:
-        pass
+    my_msg = driver.find_element(By.CSS_SELECTOR, '.msg-entity-text p')
+    assert my_msg.text != msg_text, f'Сообщение не пропало после удаления'
+    sleep(1)
 finally:
     driver.quit()

@@ -37,7 +37,8 @@ def test_check_download():
         sbis_plugin_btn = driver.find_element(By.CSS_SELECTOR, '[data-id="plugin"]')
         assert sbis_plugin_btn.is_displayed(), 'Не найден раздел СБИС плагин'
         sbis_plugin_btn.click()
-        download_plugin = driver.find_element(By.CSS_SELECTOR, '[data-for="plugin"] [class="sbis_ru-DownloadNew-loadLink"] a')
+        download_plugin = driver.find_element(By.CSS_SELECTOR, '[data-for="plugin"]'
+                                                               ' [class="sbis_ru-DownloadNew-loadLink"] a')
         assert download_plugin.is_displayed(), 'Не найдена ссылка для скачивания'
         download_plugin_link = download_plugin.get_attribute('href')
         urllib.request.urlretrieve(download_plugin_link, file_name)
