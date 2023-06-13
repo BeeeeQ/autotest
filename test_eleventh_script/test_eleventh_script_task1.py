@@ -32,6 +32,7 @@ try:
     driver.switch_to.window(driver.window_handles[1])
     news_block = driver.find_element(By.CSS_SELECTOR, '[class="tensor_ru-Index__block4-content tensor_ru-Index__card"]')
     assert news_block.is_displayed(), 'Блок новости Сила в людях не отображается'
+    assert news_block.text.__contains__('Сила в людях'), 'Заголовок новости не равен эталонному "Сила в людях"'
     more_link = driver.find_element(By.CSS_SELECTOR, 'p [href="/about"]')
     action_chains = ActionChains(driver)
     action_chains.move_to_element(more_link)
