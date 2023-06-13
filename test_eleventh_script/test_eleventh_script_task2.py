@@ -8,7 +8,7 @@ from time import sleep
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver import ActionChains, Keys
+from selenium.webdriver import ActionChains
 from datetime import datetime
 from selenium.common.exceptions import StaleElementReferenceException
 
@@ -25,11 +25,11 @@ try:
     sleep(1)
 
     login = driver.find_element(By.CSS_SELECTOR, '[name="Login"]')
-    login.send_keys(user_login, Keys.ENTER)
+    # login.send_keys(user_login, Keys.ENTER)
     assert login.get_attribute('value') == user_login
     sleep(1)
     password = driver.find_element(By.CSS_SELECTOR, '[name="Password"]')
-    password.send_keys(user_password, Keys.ENTER)
+    # password.send_keys(user_password, Keys.ENTER)
     sleep(4)
     contacts = driver.find_element(By.CSS_SELECTOR, '[data-qa="Контакты"]')
     assert contacts.is_displayed(), 'Не отображается раздел Контакты'

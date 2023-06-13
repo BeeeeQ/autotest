@@ -39,8 +39,7 @@ try:
     cookie_agreement_close = driver.find_element(By.CSS_SELECTOR, '[class="tensor_ru-CookieAgreement__close '
                                                                   'icon-Close ws-flex-shrink-0 ws-flexbox '
                                                                   'ws-align-items-center"]')
-    if cookie_agreement_close.is_displayed():
-        cookie_agreement_close.click()
+    cookie_agreement_close.click()
     assert more_link.is_displayed(), 'Линк подробнее не отображается'
     more_link.click()
     sleep(2)

@@ -29,8 +29,7 @@ def test_check_download():
         action_chains.move_to_element(download_link)
         action_chains.perform()
         cookie_agreement_close = driver.find_element(By.CSS_SELECTOR, '[class="sbis_ru-CookieAgreement__close"]')
-        if cookie_agreement_close.is_displayed():
-            cookie_agreement_close.click()
+        cookie_agreement_close.click()
         assert download_link.is_displayed(), 'Не найдена ссылка Скачать СБИС'
         download_link.click()
         sleep(1)
